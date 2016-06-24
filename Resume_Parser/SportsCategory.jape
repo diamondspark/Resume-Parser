@@ -1,0 +1,25 @@
+/*Phase:firstpass
+Input:  Lookup  
+Options: control = brill
+
+Rule: SportsCategory
+Priority: 20
+(
+{Lookup.majorType == "Sports"}
+): label
+-->
+:label.Sport = {rule= "SportsCategory" } */
+
+Phase:firstpass
+Input:  Lookup Token
+Options: control = brill
+Rule: TwoPatterns
+Priority: 20
+(
+{Lookup.majorType == "Title"}
+): title
+(
+{Lookup.majorType == "Person"}
+):person
+-->
+:title.Title ={rule= "TwoPatterns" }, :person.Person = {rule= "TwoPatterns" }
