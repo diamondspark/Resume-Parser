@@ -17,7 +17,7 @@ public class Driver {
 
 	public static void main(String[] args) throws IOException, SAXException, TikaException, GateException {
     /*Parse the Resume */
-		FileInputStream inputstream = new FileInputStream(new File("Resume.pdf"));
+		FileInputStream inputstream = new FileInputStream(new File("My Resume.pdf"));
 		PdfDocument pdfDoc = new PdfDocument(inputstream);
 		File file = pdfDoc.parser(pdfDoc);
 

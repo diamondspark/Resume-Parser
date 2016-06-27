@@ -18,6 +18,7 @@ import gate.FeatureMap;
 import gate.Gate;
 import gate.GateConstants;
 import gate.LanguageAnalyser;
+import gate.ProcessingResource;
 import gate.creole.ResourceInstantiationException;
 import gate.creole.SerialAnalyserController;
 import gate.util.GateException;
@@ -70,8 +71,8 @@ public class LanguageProcess {
 	 // Build the pipeline
 	SerialAnalyserController pipeline = (SerialAnalyserController)Factory.createResource("gate.creole.SerialAnalyserController");
 	LanguageAnalyser tokeniser = (LanguageAnalyser)Factory.createResource("gate.creole.tokeniser.DefaultTokeniser");
-	//LanguageAnalyser jape = (LanguageAnalyser)Factory.createResource("gate.creole.Transducer", gate.Utils.featureMap("grammarURL", new     
-	//File("SportsCategory.jape").toURI().toURL(),"encoding", "UTF-8")); // ensure this matches the file
+	LanguageAnalyser jape = (LanguageAnalyser)Factory.createResource("gate.creole.Transducer", gate.Utils.featureMap("grammarURL", new     
+	File("main.jape").toURI().toURL(),"encoding", "UTF-8")); // ensure this matches the file
 	pipeline.add(tokeniser);
 	//pipeline.add(jape);
 		
@@ -89,6 +90,7 @@ public class LanguageProcess {
 	    
 	 // tell the pipeline about the corpus and run it
 	 pipeline.setCorpus(corpus);
+	 pipeline.add((ProcessingResource)jape.init());
 	 setCorpus(corpus);
 	 annieExecute();
 	 pipeline.execute();
@@ -127,11 +129,12 @@ public class LanguageProcess {
 					System.out.println("Location " + stringFor(doc1, currAnnot));
 					}
 				
-				curAnnSet = defaultAnnotSet.get("ProfileSection");
-				//getAllInAnnSet(curAnnSet,doc1);
+				//Testing
+				curAnnSet = defaultAnnotSet.get("EmailFinder");
+				getAllInAnnSet(curAnnSet,doc1);
 					if(curAnnSet.iterator().hasNext() ){
 						currAnnot = (Annotation) curAnnSet.iterator().next();
-						System.out.println("Location " + stringFor(doc1, currAnnot));
+						//System.out.println("Location " + stringFor(doc1, currAnnot));
 						}
 				
 				
